@@ -74,5 +74,14 @@ fn main() {
 
     if file_path.is_empty() {
         print_help();
-        pro
+        process::exit(1);
+    }
 
+    match read_file(&file_path) {
+        Ok(lines) => print_lines(lines, double_space, line_numbers),
+        Err(e) => {
+            eprintln!("Error: {}", e); // エラーメッセージを標準エラー出力に出力
+            process::exit(1);
+        }
+    }
+}
